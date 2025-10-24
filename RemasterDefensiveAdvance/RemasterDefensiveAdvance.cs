@@ -23,7 +23,7 @@ namespace RemasterDefensiveAdvance
                     "You Raise your Shield and Stride. If you end your movement within melee reach of at least one enemy, you can make a melee Strike against that enemy.",
                     [Trait.Champion, Trait.Flourish])
                 .WithActionCost(2)
-                .WithPermanentQEffect("You Raise your Shield and Stride. If you end your movement within melee reach of at least one enemy, you can make a melee Strike against that enemy.", qf => 
+                .WithPermanentQEffect(null, qf => 
                     qf.ProvideMainAction = qfSelf =>
                     {
                         return new ActionPossibility(new CombatAction(qfSelf.Owner, new ModdedIllustration("RDAssets/Advance.png"), "Defensive Advance",
@@ -36,6 +36,7 @@ namespace RemasterDefensiveAdvance
                                     return "You cannot raise a shield.";
                                 return qfSelf.Owner.HasEffect(QEffectId.RaisingAShield) ? "You are already raising a shield." : null;
                             }))
+                            .WithShortDescription("Raise a Shield and Stride. Make a melee Strike at the end of this movement.")
                             .WithActionCost(2).WithSoundEffect(SfxName.Footsteps).WithEffectOnSelf(async (action, self) =>
                             {
                                 {
